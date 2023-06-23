@@ -25,6 +25,7 @@ services:
             - sistema-getao-network
      # db mysql ${DB_DATABASE} //Busca do arquivo .env
     mysql:
+        platform: linux/amd64
         container_name: banco-mysql
         image: mysql:5.7.22
         restart: unless-stopped
@@ -39,7 +40,6 @@ services:
             - "3388:3306"
         networks:
             - sistema-getao-network
-
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
@@ -49,9 +49,10 @@ services:
         environment:
             - PMA_ARBITRARY=1
         ports:
-            - 8899:80
+            - "8899:80"
         networks:
             - sistema-getao-network
+        platform: linux/amd64
 
 networks:
     sistema-getao-network:
