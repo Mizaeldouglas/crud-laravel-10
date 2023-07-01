@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 Route::prefix("/produtos")->group(function () {
     Route::get('/', [ProdutosController::class,'index'])->name('produtos.index');
+    Route::delete('/delete', [ProdutosController::class,'delete'])->name('produtos.delete');
     Route::get('/produtos/{id}', [ProdutosController::class,'show'])->name('produtos.show');
     Route::post('/produtos', [ProdutosController::class,'store'])->name('produtos.store');
     Route::put('/produtos/{id}', [ProdutosController::class,'update'])->name('produtos.update');
