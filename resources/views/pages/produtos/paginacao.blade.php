@@ -15,7 +15,7 @@
                 />
             </label>
             <button type="submit" class="btn btn-dark">Pesquisar</button>
-            <a type="button" href="" class="btn btn-success float-md-right">
+            <a type="button" href="{{route('cadastrar.produtos')}}" class="btn btn-success float-md-right">
                 Incluir Produto
             </a>
 
@@ -57,7 +57,11 @@
                                 <td>{{'R$' . ' ' . number_format($findProduto->valor, 2 , ',' ,'.')}}</td>
                                 <td>
                                     <a href="#" class="btn btn-light btn-sm mr-2">Editar</a>
-                                    <a href="{{route('produtos.delete')}}" class="btn btn-danger btn-sm">Excluir</a>
+                                    <a
+                                            onclick="deleteRegistroPaginacao('{{route('produtos.delete')}}', {{$findProduto->id}})"
+                                            class="btn btn-danger btn-sm">
+                                        Excluir
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -67,5 +71,12 @@
             </div>
         </div>
     </div>
+
+    <!-- Coloque a tag meta fora do loop, preferencialmente dentro da tag <head> do HTML -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Certifique-se de incluir o Chart.js se estiver usando-o -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
 @endsection

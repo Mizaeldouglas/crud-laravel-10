@@ -469,6 +469,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'lucascudo/laravel-pt-br-localization' => array(
+            'pretty_version' => 'v2.0.2',
+            'version' => '2.0.2.0',
+            'reference' => 'ca163788fd1ab18ecedb4f5faa663a85916d753c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../lucascudo/laravel-pt-br-localization',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'mockery/mockery' => array(
             'pretty_version' => '1.6.2',
             'version' => '1.6.2.0',
