@@ -14,6 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 </head>
 
 <body>
@@ -86,6 +87,8 @@
     });
 </script>
 <script src="{{asset('js/projeto.js')}}"></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
 
 </body>
 </html>

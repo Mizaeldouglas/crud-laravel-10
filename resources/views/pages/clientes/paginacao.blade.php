@@ -1,12 +1,14 @@
+
+
 @extends('index')
 @section('content')
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">Produtos</h1>
+        <h1 class="h2">Clientes</h1>
     </div>
 
     <div>
-        <form action="{{route('produtos.index')}}" method="get">
+        <form action="{{route('clientes.index')}}" method="get">
             <label>
                 <input
                         type="text"
@@ -15,27 +17,35 @@
                 />
             </label>
             <button type="submit" class="btn btn-dark">Pesquisar</button>
-            <a type="button" href="{{route('cadastrar.produtos')}}" class="btn btn-success float-md-right">
-                Incluir Produto
+            <a type="button" href="{{route('cadastrar.clientes')}}" class="btn btn-success float-md-right">
+                Incluir Cliente
             </a>
 
         </form>
 
         <div>
             <div class="table-responsive">
-                @if($findProdutos->isEmpty())
+                @if($findClientes->isEmpty())
 
                     <table class="table table-striped table-sm">
                         <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Valor</th>
-                            <th>Ações</th>
+                            <th>E-mail</th>
+                            <th>Endereço</th>
+                            <th>Logradouro</th>
+                            <th>Cep</th>
+                            <th>Bairro</th>
+                            <th class="pl-md-5">Ações</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td><strong>{{ strtoupper($pesquisar) ?? ''}} </strong> Dado inexistente</td>
+                            <td>Dado inexistente</td>
+                            <td>Dado inexistente</td>
+                            <td>Dado inexistente</td>
+                            <td>Dado inexistente</td>
                             <td>Dado inexistente</td>
                             <td>Dado inexistente</td>
                         </tr>
@@ -46,19 +56,27 @@
                         <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Valor</th>
-                            <th class="pl-md-5">Ações</th>
+                            <th>E-mail</th>
+                            <th>Endereço</th>
+                            <th>Logradouro</th>
+                            <th>Cep</th>
+                            <th>Bairro</th>
+                            <th class="">Ações</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($findProdutos as $findProduto)
+                        @foreach($findClientes as $cliente)
                             <tr>
-                                <td>{{$findProduto->nome}}</td>
-                                <td>{{'R$' . ' ' . number_format($findProduto->valor, 2 , ',' ,'.')}}</td>
+                                <td>{{$cliente->nome}}</td>
+                                <td>{{$cliente->email}}</td>
+                                <td>{{$cliente->endereco}}</td>
+                                <td>{{$cliente->logradouro}}</td>
+                                <td>{{$cliente->cep}}</td>
+                                <td>{{$cliente->bairro}}</td>
                                 <td>
-                                    <a href="{{route('atualizar.produtos',$findProduto->id)}}" class="btn btn-light btn-sm mr-2">Editar</a>
+                                    <a href="{{route('atualizar.clientes',$cliente->id)}}" class="btn btn-light btn-sm mr-2">Editar</a>
                                     <a
-                                            onclick="deleteRegistroPaginacao('{{route('produtos.delete')}}', {{$findProduto->id}})"
+                                            onclick="deleteRegistroPaginacao('{{route('clientes.delete')}}', {{$cliente->id}})"
                                             class="btn btn-danger btn-sm">
                                         Excluir
                                     </a>
@@ -81,7 +99,5 @@
     {!! Toastr::message() !!}
 
 @endsection
-
-
 
 
