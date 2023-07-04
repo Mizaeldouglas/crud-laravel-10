@@ -29,32 +29,10 @@
                 >
                 @error('email') <p class="pl-1 invalid-feedback"><strong>{{$errors->first('email')}}</strong></p> @enderror
             </div>
-
-            <div class="form-group col-md-6">
-                <label>Endereço</label>
-                <input
-                        class="form-control @error('endereco') is-invalid @enderror"
-                        name="endereco"
-                        placeholder="Digite o Endereço do cliente"
-                        value="{{old('endereco')}}"
-                >
-                @error('email') <p class="pl-1 invalid-feedback"><strong>{{$errors->first('email')}}</strong></p> @enderror
-            </div>
-
-            <div class="form-group col-md-6">
-                <label>Logradouro</label>
-                <input
-                        class="form-control @error('logradouro') is-invalid @enderror"
-                        name="logradouro"
-                        placeholder="Digite o Logradouro do cliente"
-                        value="{{old('logradouro')}}"
-                >
-                @error('logradouro') <p class="pl-1 invalid-feedback"><strong>{{$errors->first('logradouro')}}</strong></p> @enderror
-            </div>
-
             <div class="form-group col-md-6">
                 <label>Cep</label>
                 <input
+                        id="cep"
                         class="form-control @error('cep') is-invalid @enderror"
                         name="cep"
                         placeholder="Digite o Cep do cliente"
@@ -64,8 +42,36 @@
             </div>
 
             <div class="form-group col-md-6">
+                <label>Endereço</label>
+                <input
+                        id="endereco"
+                        class="form-control @error('endereco') is-invalid @enderror"
+                        name="endereco"
+                        placeholder="Digite o Endereço do cliente"
+                        value="{{old('endereco')}}"
+                >
+                @error('email') <p class="pl-1 invalid-feedback"><strong>{{$errors->first('email')}}</strong></p> @enderror
+            </div>
+
+
+            <div class="form-group col-md-6">
+                <label>Logradouro</label>
+                <input
+                        id="logradouro"
+                        class="form-control @error('logradouro') is-invalid @enderror"
+                        name="logradouro"
+                        placeholder="Digite o Logradouro do cliente"
+                        value="{{old('logradouro')}}"
+                >
+                @error('logradouro') <p class="pl-1 invalid-feedback"><strong>{{$errors->first('logradouro')}}</strong></p> @enderror
+            </div>
+
+
+
+            <div class="form-group col-md-6">
                 <label>Bairro</label>
                 <input
+                        id="bairro"
                         class="form-control @error('bairro') is-invalid @enderror"
                         name="bairro"
                         placeholder="Digite o Bairro do cliente"
@@ -76,4 +82,31 @@
         </div>
         <button type="submit" class="btn btn-success">Cadastrar</button>
     </form>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $("#cep").blur(function () {
+            var cep = $(this).val().replace(/\D/g, '');
+            if (cep != "") {
+                var validacep = /^[0-9]{8}$/;
+                if (validacep.test(cep)) {
+                    $("#logradouro").val("");
+                    $("#bairro").val(" ");
+                    $("#endereco").val(" ");
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+                        if (!("erro" in dados)) {
+                            $("#logradouro").val(dados.logradouro.toUpperCase());
+                            $("#bairro").val(dados.bairro.toUpperCase());
+                            $("#endereco").val(dados.localidade.toUpperCase());
+                        }
+                        else {
+                            alert("CEP não encontrado de forma automatizado digite manualmente ou tente novamente.");
+                        }
+                    });
+                }
+            }
+        });
+    </script>
 @endsection
