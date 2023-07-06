@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\VendaController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsuariosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +17,11 @@ use App\Http\Controllers\VendaController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::prefix("/dashboard")->group(function () {
+    Route::get('/', [DashboardController::class,'index'])->name('dashboard.index');
 });
+
+
 
 Route::prefix("/produtos")->group(function () {
 
@@ -41,6 +45,18 @@ Route::prefix("/clientes")->group(function () {
 
     Route::get('/atualizar-clientes/{id}', [ClientesController::class,'atualizarClientes'])->name('atualizar.clientes');
     Route::put('/atualizar-clientes/{id}', [ClientesController::class,'atualizarclientes'])->name('atualizar.clientes');
+
+});
+
+Route::prefix("/usuarios")->group(function () {
+    Route::get('/', [UsuariosController::class,'index'])->name('usuarios.index');
+    Route::delete('/delete', [UsuariosController::class,'delete'])->name('usuarios.delete');
+
+    Route::get('/cadastrar-usuarios', [UsuariosController::class,'cadastrarUsuarios'])->name('cadastrar.usuarios');
+    Route::post('/cadastrar-usuarios', [UsuariosController::class,'cadastrarUsuarios'])->name('cadastrar.usuarios');
+
+    Route::get('/atualizar-usuarios/{id}', [UsuariosController::class,'atualizarUsuarios'])->name('atualizar.usuarios');
+    Route::put('/atualizar-usuarios/{id}', [UsuariosController::class,'atualizarUsuarios'])->name('atualizar.usuarios');
 
 });
 

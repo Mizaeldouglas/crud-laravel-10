@@ -2,7 +2,7 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link{{ request()->is('dashboard*') ? ' active' : '' }}" href="{{ route('dashboard.index') }}">
                     <span data-feather="home"></span>
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
@@ -23,6 +23,12 @@
                 <a class="nav-link{{ request()->is('clientes*') ? ' active' : '' }}" href="{{ route('clientes.index') }}">
                     <span data-feather="users"></span>
                     Clientes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{{ request()->is('usuarios*') ? ' active' : '' }}" href="{{ route('usuarios.index') }}">
+                    <span data-feather="users"></span>
+                    Usuarios
                 </a>
             </li>
         </ul>
